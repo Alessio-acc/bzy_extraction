@@ -1,9 +1,9 @@
--- int_stg_*_h : storico mensile ricostruito da int_stg_*_tmp_h
+-- stg_*_hist : storico mensile ricostruito da int_stg_*_tmp_h
 -- FIC_MIS_DATE = ultimo giorno del mese di ciascun record, FIC_MIS_DATE_aux = stesso valore,
 -- pulizia \r\n delle colonne STRING, record AMLA aggiunti per ciascun mese (solo 3 stg).
 
 -- stg_account_alt_ccy_values
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_account_alt_ccy_values_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_account_alt_ccy_values_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -16,7 +16,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_account_alt_ccy_values_tmp_h`;
 
 -- stg_address_master
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_address_master_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_address_master_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -40,7 +40,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_address_master_tmp_h`;
 
 -- stg_cards
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_cards_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_cards_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -62,7 +62,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_cards_tmp_h`;
 
 -- stg_cards_payment_txns
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_cards_payment_txns_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_cards_payment_txns_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -85,7 +85,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_cards_payment_txns_tmp_h`;
 
 -- stg_casa
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_casa_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_casa_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -138,7 +138,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_casa_tmp_h`;
 
 -- stg_casa_txns
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_casa_txns_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_casa_txns_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -205,7 +205,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_casa_txns_tmp_h`;
 
 -- stg_correspondent_prod_served
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_correspondent_prod_served_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_correspondent_prod_served_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -218,7 +218,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_correspondent_prod_served_tmp_h`;
 
 -- stg_country_master
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_country_master_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_country_master_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -233,7 +233,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_country_master_tmp_h`;
 
 -- stg_customer_acct_role_master
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_acct_role_master_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_customer_acct_role_master_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -252,7 +252,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_acct_role_master_tmp_h`;
 
 -- stg_customer_country_relation
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_country_relation_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_customer_country_relation_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 WITH m AS (SELECT d FROM UNNEST([DATE '2026-01-31', DATE '2026-02-28', DATE '2026-03-31', DATE '2026-04-30', DATE '2026-05-31']) AS d)
@@ -271,7 +271,7 @@ UNION ALL
 SELECT d AS FIC_MIS_DATE, '0000000000000076' AS V_CUST_REF_CODE, 'CO3' AS V_DATA_ORIGIN, 'SK' AS V_ISO_COUNTRY_CODE, 'F' AS V_RELATIONSHIP_TYPE, d AS FIC_MIS_DATE_aux FROM m;
 
 -- stg_customer_identifctn_doc
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_identifctn_doc_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_customer_identifctn_doc_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -297,7 +297,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_identifctn_doc_tmp_h`;
 
 -- stg_employee_master
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_employee_master_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_employee_master_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -339,7 +339,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_employee_master_tmp_h`;
 
 -- stg_employee_service_account
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_employee_service_account_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_employee_service_account_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -353,7 +353,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_employee_service_account_tmp_h`;
 
 -- stg_front_office_txn_party
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_front_office_txn_party_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_front_office_txn_party_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -394,7 +394,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_front_office_txn_party_tmp_h`;
 
 -- stg_loan_contracts
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_loan_contracts_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_loan_contracts_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -416,7 +416,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_loan_contracts_tmp_h`;
 
 -- stg_party_account_role_map
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_account_role_map_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_account_role_map_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -431,7 +431,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_account_role_map_tmp_h`;
 
 -- stg_party_address_map
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_address_map_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_address_map_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -445,7 +445,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_address_map_tmp_h`;
 
 -- stg_party_details
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_details_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_details_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -461,7 +461,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_details_tmp_h`;
 
 -- stg_party_email_map
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_email_map_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_email_map_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -476,7 +476,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_email_map_tmp_h`;
 
 -- stg_party_master
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_master_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_master_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -552,7 +552,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_master_tmp_h`;
 
 -- stg_party_other_names
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_other_names_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_other_names_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 WITH m AS (SELECT d FROM UNNEST([DATE '2026-01-31', DATE '2026-02-28', DATE '2026-03-31', DATE '2026-04-30', DATE '2026-05-31']) AS d)
@@ -561,7 +561,7 @@ UNION ALL
 SELECT DATE '9999-12-31' AS D_VALIDATION_END_DATE, DATE '9999-12-31' AS D_VALIDATION_START_DATE, d AS FIC_MIS_DATE, '1' AS N_PARTY_OTHER_NAME_ID, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_LANGUAGE, CAST(NULL AS STRING) AS V_LAST_NAME, CAST(NULL AS STRING) AS V_MIDDLE_NAME, CAST(NULL AS STRING) AS V_NAME_QUALITY, CAST(NULL AS STRING) AS V_OTHER_NAME_TYPE, CAST(NULL AS STRING) AS V_PARTY_FULL_NAME, '0000000000000041' AS V_PARTY_ID, 'Beňa' AS V_PARTY_NAME, CAST(NULL AS STRING) AS V_SALUTATION, CAST(NULL AS STRING) AS V_SUFFIX, d AS FIC_MIS_DATE_aux FROM m;
 
 -- stg_party_party_relationship
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_party_relationship_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_party_relationship_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 WITH m AS (SELECT d FROM UNNEST([DATE '2026-01-31', DATE '2026-02-28', DATE '2026-03-31', DATE '2026-04-30', DATE '2026-05-31']) AS d)
@@ -590,7 +590,7 @@ UNION ALL
 SELECT DATE '2017-10-07' AS D_RELATIONSHIP_EFF_DATE, CAST(NULL AS DATE) AS D_RELATIONSHIP_EXP_DATE, d AS FIC_MIS_DATE, CAST(NULL AS STRING) AS F_BORR_RELATED_PARTY_TYPE_IND, 'N' AS F_CONTROLLING_AUTH_FLAG, CAST(NULL AS FLOAT64) AS N_SHAREHOLDING_PERCENT, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_PARENT_ID, '0000000001028179' AS V_PARTY_ID, '0000000001030593' AS V_RELATED_PARTY_ID, 'Senior Managing Officials' AS V_RELATIONSHIP_DESC, 'SMO' AS V_RELATIONSHIP_TYPE_CODE, d AS FIC_MIS_DATE_aux FROM m;
 
 -- stg_party_phone_map
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_phone_map_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_phone_map_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -607,7 +607,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_phone_map_tmp_h`;
 
 -- stg_party_role_map
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_role_map_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_role_map_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -621,7 +621,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_role_map_tmp_h`;
 
 -- stg_party_type_master
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_type_master_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_party_type_master_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -635,7 +635,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_type_master_tmp_h`;
 
 -- stg_trading_account_txns
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_trading_account_txns_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_trading_account_txns_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -660,7 +660,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_trading_account_txns_tmp_h`;
 
 -- stg_txn_alt_ccy_values
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_txn_alt_ccy_values_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_txn_alt_ccy_values_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -674,7 +674,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_txn_alt_ccy_values_tmp_h`;
 
 -- stg_unc_csmt_table
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_unc_csmt_table_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_unc_csmt_table_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -693,7 +693,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_unc_csmt_table_tmp_h`;
 
 -- stg_watchlist_master
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_watchlist_master_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_watchlist_master_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
@@ -711,7 +711,7 @@ SELECT * REPLACE (
 FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_watchlist_master_tmp_h`;
 
 -- stg_watchlist_member_entry
-CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_watchlist_member_entry_h`
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.stg_watchlist_member_entry_hist`
 PARTITION BY FIC_MIS_DATE
 AS
 SELECT * REPLACE (
