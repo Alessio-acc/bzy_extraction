@@ -1,0 +1,731 @@
+-- int_stg_*_h : storico mensile ricostruito da int_stg_*_tmp_h
+-- FIC_MIS_DATE = ultimo giorno del mese di ciascun record, FIC_MIS_DATE_aux = stesso valore,
+-- pulizia \r\n delle colonne STRING, record AMLA aggiunti per ciascun mese (solo 3 stg).
+
+-- stg_account_alt_ccy_values
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_account_alt_ccy_values_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_FCY_CODE, r'[\r\n]+', ' ') AS V_FCY_CODE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_account_alt_ccy_values_tmp_h`;
+
+-- stg_address_master
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_address_master_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_ADDRESS_ID, r'[\r\n]+', ' ') AS V_ADDRESS_ID,
+    REGEXP_REPLACE(V_ADDRESS_LINE1, r'[\r\n]+', ' ') AS V_ADDRESS_LINE1,
+    REGEXP_REPLACE(V_ADDRESS_LINE2, r'[\r\n]+', ' ') AS V_ADDRESS_LINE2,
+    REGEXP_REPLACE(V_ADDRESS_LINE3, r'[\r\n]+', ' ') AS V_ADDRESS_LINE3,
+    REGEXP_REPLACE(V_ADDRESS_LINE4, r'[\r\n]+', ' ') AS V_ADDRESS_LINE4,
+    REGEXP_REPLACE(V_ADDRESS_LINE5, r'[\r\n]+', ' ') AS V_ADDRESS_LINE5,
+    REGEXP_REPLACE(V_ADDRESS_LINE6, r'[\r\n]+', ' ') AS V_ADDRESS_LINE6,
+    REGEXP_REPLACE(V_CITY, r'[\r\n]+', ' ') AS V_CITY,
+    REGEXP_REPLACE(V_COUNTRY_CODE, r'[\r\n]+', ' ') AS V_COUNTRY_CODE,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_MAIL_HANDLING_INSTRUCTION, r'[\r\n]+', ' ') AS V_MAIL_HANDLING_INSTRUCTION,
+    REGEXP_REPLACE(V_POSTAL_CODE, r'[\r\n]+', ' ') AS V_POSTAL_CODE,
+    REGEXP_REPLACE(V_REGION, r'[\r\n]+', ' ') AS V_REGION,
+    REGEXP_REPLACE(V_STATE, r'[\r\n]+', ' ') AS V_STATE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_address_master_tmp_h`;
+
+-- stg_cards
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_cards_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_ACCT_DISPLAY_NAME, r'[\r\n]+', ' ') AS V_ACCT_DISPLAY_NAME,
+    REGEXP_REPLACE(V_ACCT_STATUS_CODE, r'[\r\n]+', ' ') AS V_ACCT_STATUS_CODE,
+    REGEXP_REPLACE(V_BRANCH_CODE, r'[\r\n]+', ' ') AS V_BRANCH_CODE,
+    REGEXP_REPLACE(V_BUSINESS_DOMAIN, r'[\r\n]+', ' ') AS V_BUSINESS_DOMAIN,
+    REGEXP_REPLACE(V_CCY_CODE, r'[\r\n]+', ' ') AS V_CCY_CODE,
+    REGEXP_REPLACE(V_CUST_REF_CODE, r'[\r\n]+', ' ') AS V_CUST_REF_CODE,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_GAAP_CODE, r'[\r\n]+', ' ') AS V_GAAP_CODE,
+    REGEXP_REPLACE(V_MANTAS_ACCT_HOLDR_TYPE, r'[\r\n]+', ' ') AS V_MANTAS_ACCT_HOLDR_TYPE,
+    REGEXP_REPLACE(V_OWNERSHIP_TYPE, r'[\r\n]+', ' ') AS V_OWNERSHIP_TYPE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_cards_tmp_h`;
+
+-- stg_cards_payment_txns
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_cards_payment_txns_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_CROSS_BORDER_TXN_FLAG, r'[\r\n]+', ' ') AS F_CROSS_BORDER_TXN_FLAG,
+    REGEXP_REPLACE(F_UNRELATED_PARTY_FLAG, r'[\r\n]+', ' ') AS F_UNRELATED_PARTY_FLAG,
+    REGEXP_REPLACE(V_CANCELED_PAIRING_TXN_ID, r'[\r\n]+', ' ') AS V_CANCELED_PAIRING_TXN_ID,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_MANTAS_TXN_ADJUSTMENT_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_ADJUSTMENT_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_ASSET_CLASS_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_ASSET_CLASS_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_CHANNEL_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_CHANNEL_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_PROD_TYPE_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_PROD_TYPE_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_PURPOSE_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_PURPOSE_CD,
+    REGEXP_REPLACE(V_ORIGNTR_TO_BENFCRY_INSTRCTNS, r'[\r\n]+', ' ') AS V_ORIGNTR_TO_BENFCRY_INSTRCTNS,
+    REGEXP_REPLACE(V_PAYMENT_TXN_ID, r'[\r\n]+', ' ') AS V_PAYMENT_TXN_ID,
+    REGEXP_REPLACE(V_PAYMNT_INSTRUMENT_COMMENTS, r'[\r\n]+', ' ') AS V_PAYMNT_INSTRUMENT_COMMENTS,
+    REGEXP_REPLACE(V_PAYMNT_INSTRUMENT_MARKINGS, r'[\r\n]+', ' ') AS V_PAYMNT_INSTRUMENT_MARKINGS
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_cards_payment_txns_tmp_h`;
+
+-- stg_casa
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_casa_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_CASH_REPORT_EXEMPT_FLAG, r'[\r\n]+', ' ') AS F_CASH_REPORT_EXEMPT_FLAG,
+    REGEXP_REPLACE(F_EMP_ACCT_FLAG, r'[\r\n]+', ' ') AS F_EMP_ACCT_FLAG,
+    REGEXP_REPLACE(F_GLOBAL_RELATIONSHIP_IND, r'[\r\n]+', ' ') AS F_GLOBAL_RELATIONSHIP_IND,
+    REGEXP_REPLACE(F_HARD_HOLD_FLAG, r'[\r\n]+', ' ') AS F_HARD_HOLD_FLAG,
+    REGEXP_REPLACE(F_HIGH_PROFILE_ACCT_FLAG, r'[\r\n]+', ' ') AS F_HIGH_PROFILE_ACCT_FLAG,
+    REGEXP_REPLACE(F_NOTIFY_LETTER_SUPP_FLAG, r'[\r\n]+', ' ') AS F_NOTIFY_LETTER_SUPP_FLAG,
+    REGEXP_REPLACE(F_RECALCITRANT_FLAG, r'[\r\n]+', ' ') AS F_RECALCITRANT_FLAG,
+    REGEXP_REPLACE(F_SI_US_ACCT_FLAG, r'[\r\n]+', ' ') AS F_SI_US_ACCT_FLAG,
+    REGEXP_REPLACE(F_STMT_SUPP_FLAG, r'[\r\n]+', ' ') AS F_STMT_SUPP_FLAG,
+    REGEXP_REPLACE(F_US_INDICIA, r'[\r\n]+', ' ') AS F_US_INDICIA,
+    REGEXP_REPLACE(F_US_POA_OR_SIGNATORY_FLAG, r'[\r\n]+', ' ') AS F_US_POA_OR_SIGNATORY_FLAG,
+    REGEXP_REPLACE(V_ACCOUNT_GROUP_ID, r'[\r\n]+', ' ') AS V_ACCOUNT_GROUP_ID,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_ACCOUNT_PEER_GROUP_ID, r'[\r\n]+', ' ') AS V_ACCOUNT_PEER_GROUP_ID,
+    REGEXP_REPLACE(V_ACCOUNT_PURPOSE, r'[\r\n]+', ' ') AS V_ACCOUNT_PURPOSE,
+    REGEXP_REPLACE(V_ACCT_DISPLAY_NAME, r'[\r\n]+', ' ') AS V_ACCT_DISPLAY_NAME,
+    REGEXP_REPLACE(V_ACCT_STATUS_CODE, r'[\r\n]+', ' ') AS V_ACCT_STATUS_CODE,
+    REGEXP_REPLACE(V_BRANCH_CODE, r'[\r\n]+', ' ') AS V_BRANCH_CODE,
+    REGEXP_REPLACE(V_BUSINESS_DOMAIN, r'[\r\n]+', ' ') AS V_BUSINESS_DOMAIN,
+    REGEXP_REPLACE(V_BUSINESS_SEGMENT_CODE, r'[\r\n]+', ' ') AS V_BUSINESS_SEGMENT_CODE,
+    REGEXP_REPLACE(V_CAMPAIGN_ID, r'[\r\n]+', ' ') AS V_CAMPAIGN_ID,
+    REGEXP_REPLACE(V_CCY_CODE, r'[\r\n]+', ' ') AS V_CCY_CODE,
+    REGEXP_REPLACE(V_CHANNEL_CODE, r'[\r\n]+', ' ') AS V_CHANNEL_CODE,
+    REGEXP_REPLACE(V_COUNTRY_ID, r'[\r\n]+', ' ') AS V_COUNTRY_ID,
+    REGEXP_REPLACE(V_CUST_REF_CODE, r'[\r\n]+', ' ') AS V_CUST_REF_CODE,
+    REGEXP_REPLACE(V_CUST_TYPE, r'[\r\n]+', ' ') AS V_CUST_TYPE,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_FATCA_POOL_REPORT_CODE, r'[\r\n]+', ' ') AS V_FATCA_POOL_REPORT_CODE,
+    REGEXP_REPLACE(V_FATCA_STATUS_CODE, r'[\r\n]+', ' ') AS V_FATCA_STATUS_CODE,
+    REGEXP_REPLACE(V_GAAP_CODE, r'[\r\n]+', ' ') AS V_GAAP_CODE,
+    REGEXP_REPLACE(V_LV_CODE, r'[\r\n]+', ' ') AS V_LV_CODE,
+    REGEXP_REPLACE(V_MANTAS_ACCT_HOLDR_TYPE, r'[\r\n]+', ' ') AS V_MANTAS_ACCT_HOLDR_TYPE,
+    REGEXP_REPLACE(V_METHOD_INITIAL_FUNDS, r'[\r\n]+', ' ') AS V_METHOD_INITIAL_FUNDS,
+    REGEXP_REPLACE(V_OFAC_REASON_IND, r'[\r\n]+', ' ') AS V_OFAC_REASON_IND,
+    REGEXP_REPLACE(V_ORIGINAL_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ORIGINAL_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_OWNERSHIP_TYPE, r'[\r\n]+', ' ') AS V_OWNERSHIP_TYPE,
+    REGEXP_REPLACE(V_PERMANENT_ACCT_ID, r'[\r\n]+', ' ') AS V_PERMANENT_ACCT_ID,
+    REGEXP_REPLACE(V_REGION_CODE, r'[\r\n]+', ' ') AS V_REGION_CODE,
+    REGEXP_REPLACE(V_SAVING_IND, r'[\r\n]+', ' ') AS V_SAVING_IND,
+    REGEXP_REPLACE(V_SOURCE_INITIAL_FUNDS, r'[\r\n]+', ' ') AS V_SOURCE_INITIAL_FUNDS,
+    REGEXP_REPLACE(V_TAX_PAYER_CUST_REF_CODE, r'[\r\n]+', ' ') AS V_TAX_PAYER_CUST_REF_CODE,
+    REGEXP_REPLACE(V_TAX_WITHHOLDING_FLAG, r'[\r\n]+', ' ') AS V_TAX_WITHHOLDING_FLAG
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_casa_tmp_h`;
+
+-- stg_casa_txns
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_casa_txns_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_BANK_TRANSFER_FLAG, r'[\r\n]+', ' ') AS F_BANK_TRANSFER_FLAG,
+    REGEXP_REPLACE(F_CANCELING_INDICATOR, r'[\r\n]+', ' ') AS F_CANCELING_INDICATOR,
+    REGEXP_REPLACE(F_CROSS_BORDER_TXN_FLAG, r'[\r\n]+', ' ') AS F_CROSS_BORDER_TXN_FLAG,
+    REGEXP_REPLACE(F_DRCR_INDICATOR, r'[\r\n]+', ' ') AS F_DRCR_INDICATOR,
+    REGEXP_REPLACE(F_PASS_THROUGH_FLAG, r'[\r\n]+', ' ') AS F_PASS_THROUGH_FLAG,
+    REGEXP_REPLACE(F_STMT_SUPP_FLAG, r'[\r\n]+', ' ') AS F_STMT_SUPP_FLAG,
+    REGEXP_REPLACE(F_UNRELATED_PARTY_FLAG, r'[\r\n]+', ' ') AS F_UNRELATED_PARTY_FLAG,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_ASSET_CLASS_CD, r'[\r\n]+', ' ') AS V_ASSET_CLASS_CD,
+    REGEXP_REPLACE(V_BANK_TO_BANK_INSTRUCTIONS, r'[\r\n]+', ' ') AS V_BANK_TO_BANK_INSTRUCTIONS,
+    REGEXP_REPLACE(V_BRANCH_CODE, r'[\r\n]+', ' ') AS V_BRANCH_CODE,
+    REGEXP_REPLACE(V_CANCELED_PAIRING_TXN_ID, r'[\r\n]+', ' ') AS V_CANCELED_PAIRING_TXN_ID,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_INITIATING_ROLE, r'[\r\n]+', ' ') AS V_INITIATING_ROLE,
+    REGEXP_REPLACE(V_LOCAL_INSTRUMENT_CD, r'[\r\n]+', ' ') AS V_LOCAL_INSTRUMENT_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_ADJUSTMENT_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_ADJUSTMENT_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_ASSET_CLASS_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_ASSET_CLASS_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_CHANNEL_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_CHANNEL_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_PROD_TYPE_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_PROD_TYPE_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_PURPOSE_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_PURPOSE_CD,
+    REGEXP_REPLACE(V_MERCHANT_CATEGORY_CODE, r'[\r\n]+', ' ') AS V_MERCHANT_CATEGORY_CODE,
+    REGEXP_REPLACE(V_OFFSET_ACCOUNT_ID, r'[\r\n]+', ' ') AS V_OFFSET_ACCOUNT_ID,
+    REGEXP_REPLACE(V_ON_US_OFF_US_IND, r'[\r\n]+', ' ') AS V_ON_US_OFF_US_IND,
+    REGEXP_REPLACE(V_ORIGINAL_TXN_REF_NO, r'[\r\n]+', ' ') AS V_ORIGINAL_TXN_REF_NO,
+    REPLACE(REGEXP_REPLACE(V_ORIGNTR_TO_BENFCRY_INSTRCTNS, r'[\r\n]+', ' '), '|', '') AS V_ORIGNTR_TO_BENFCRY_INSTRCTNS,
+    REGEXP_REPLACE(V_PAYMENT_MECHANISM_ID, r'[\r\n]+', ' ') AS V_PAYMENT_MECHANISM_ID,
+    REGEXP_REPLACE(V_PAYMNT_INSTRUMENT_COMMENTS, r'[\r\n]+', ' ') AS V_PAYMNT_INSTRUMENT_COMMENTS,
+    REGEXP_REPLACE(V_PAYMNT_INSTRUMENT_MARKINGS, r'[\r\n]+', ' ') AS V_PAYMNT_INSTRUMENT_MARKINGS,
+    REGEXP_REPLACE(V_PAYMNT_INSTRUMENT_NUMBER, r'[\r\n]+', ' ') AS V_PAYMNT_INSTRUMENT_NUMBER,
+    REGEXP_REPLACE(V_PAYMNT_INSTRUMENT_ROUTING_CD, r'[\r\n]+', ' ') AS V_PAYMNT_INSTRUMENT_ROUTING_CD,
+    REGEXP_REPLACE(V_PROD_LONG_DESC, r'[\r\n]+', ' ') AS V_PROD_LONG_DESC,
+    REGEXP_REPLACE(V_PROPRIETARY_CD, r'[\r\n]+', ' ') AS V_PROPRIETARY_CD,
+    REGEXP_REPLACE(V_RECURRING_TXN_INDICATOR, r'[\r\n]+', ' ') AS V_RECURRING_TXN_INDICATOR,
+    REGEXP_REPLACE(V_REPORT_CLASS_CD, r'[\r\n]+', ' ') AS V_REPORT_CLASS_CD,
+    REGEXP_REPLACE(V_STD_ENTRY_CLASS_ACH_CD, r'[\r\n]+', ' ') AS V_STD_ENTRY_CLASS_ACH_CD,
+    REGEXP_REPLACE(V_TXN_ACY_CODE, r'[\r\n]+', ' ') AS V_TXN_ACY_CODE,
+    REGEXP_REPLACE(V_TXN_CCY_CODE, r'[\r\n]+', ' ') AS V_TXN_CCY_CODE,
+    REGEXP_REPLACE(V_TXN_CHANNEL_CD, r'[\r\n]+', ' ') AS V_TXN_CHANNEL_CD,
+    REGEXP_REPLACE(V_TXN_CHANNEL_LOCATION_ID, r'[\r\n]+', ' ') AS V_TXN_CHANNEL_LOCATION_ID,
+    REGEXP_REPLACE(V_TXN_CHANNEL_LOCATION_NAME, r'[\r\n]+', ' ') AS V_TXN_CHANNEL_LOCATION_NAME,
+    REGEXP_REPLACE(V_TXN_CHANNEL_TYPE, r'[\r\n]+', ' ') AS V_TXN_CHANNEL_TYPE,
+    REGEXP_REPLACE(V_TXN_CNDTR_TYPE_CD, r'[\r\n]+', ' ') AS V_TXN_CNDTR_TYPE_CD,
+    REGEXP_REPLACE(V_TXN_DESC, r'[\r\n]+', ' ') AS V_TXN_DESC,
+    REGEXP_REPLACE(V_TXN_ENTRY_SYS_LOGON_ID, r'[\r\n]+', ' ') AS V_TXN_ENTRY_SYS_LOGON_ID,
+    REGEXP_REPLACE(V_TXN_ENTRY_TERMINAL_ID, r'[\r\n]+', ' ') AS V_TXN_ENTRY_TERMINAL_ID,
+    REGEXP_REPLACE(V_TXN_GEO_LOCATION, r'[\r\n]+', ' ') AS V_TXN_GEO_LOCATION,
+    REGEXP_REPLACE(V_TXN_GROUP_ID, r'[\r\n]+', ' ') AS V_TXN_GROUP_ID,
+    REGEXP_REPLACE(V_TXN_LOCATION_ADDRESS, r'[\r\n]+', ' ') AS V_TXN_LOCATION_ADDRESS,
+    REGEXP_REPLACE(V_TXN_LOCATION_CODE, r'[\r\n]+', ' ') AS V_TXN_LOCATION_CODE,
+    REGEXP_REPLACE(V_TXN_LOCATION_ID_TYPE, r'[\r\n]+', ' ') AS V_TXN_LOCATION_ID_TYPE,
+    REGEXP_REPLACE(V_TXN_ORIGIN_COUNTRY_ID, r'[\r\n]+', ' ') AS V_TXN_ORIGIN_COUNTRY_ID,
+    REGEXP_REPLACE(V_TXN_REASON, r'[\r\n]+', ' ') AS V_TXN_REASON,
+    REGEXP_REPLACE(V_TXN_REASON_CD, r'[\r\n]+', ' ') AS V_TXN_REASON_CD,
+    REGEXP_REPLACE(V_TXN_REF_NO, r'[\r\n]+', ' ') AS V_TXN_REF_NO,
+    REGEXP_REPLACE(V_TXN_TELLER_ID, r'[\r\n]+', ' ') AS V_TXN_TELLER_ID,
+    REGEXP_REPLACE(V_UNRELATED_PARTY_CD, r'[\r\n]+', ' ') AS V_UNRELATED_PARTY_CD,
+    REGEXP_REPLACE(V_USER_ID, r'[\r\n]+', ' ') AS V_USER_ID
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_casa_txns_tmp_h`;
+
+-- stg_correspondent_prod_served
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_correspondent_prod_served_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(C_CORR_FIN_INST_ID, r'[\r\n]+', ' ') AS C_CORR_FIN_INST_ID,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_PROD_CODE, r'[\r\n]+', ' ') AS V_PROD_CODE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_correspondent_prod_served_tmp_h`;
+
+-- stg_country_master
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_country_master_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_CALENDAR_NAME, r'[\r\n]+', ' ') AS V_CALENDAR_NAME,
+    REGEXP_REPLACE(V_COUNTRY_ID, r'[\r\n]+', ' ') AS V_COUNTRY_ID,
+    REGEXP_REPLACE(V_COUNTRY_NAME, r'[\r\n]+', ' ') AS V_COUNTRY_NAME,
+    REGEXP_REPLACE(V_DATA_SOURCE_CODE, r'[\r\n]+', ' ') AS V_DATA_SOURCE_CODE,
+    REGEXP_REPLACE(V_ISO_COUNTRY_CD, r'[\r\n]+', ' ') AS V_ISO_COUNTRY_CD
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_country_master_tmp_h`;
+
+-- stg_customer_acct_role_master
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_acct_role_master_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_AUTHORITY_TO_TRADE_IND, r'[\r\n]+', ' ') AS F_AUTHORITY_TO_TRADE_IND,
+    REGEXP_REPLACE(F_AUTH_TO_WITHDRAW_FUNDS_IND, r'[\r\n]+', ' ') AS F_AUTH_TO_WITHDRAW_FUNDS_IND,
+    REGEXP_REPLACE(F_GUARDIANSHIP_IND, r'[\r\n]+', ' ') AS F_GUARDIANSHIP_IND,
+    REGEXP_REPLACE(F_OWNERSHIP_IND, r'[\r\n]+', ' ') AS F_OWNERSHIP_IND,
+    REGEXP_REPLACE(F_POWER_OF_ATTORNEY_IND, r'[\r\n]+', ' ') AS F_POWER_OF_ATTORNEY_IND,
+    REGEXP_REPLACE(F_RELATED_ACCOUNT_IND, r'[\r\n]+', ' ') AS F_RELATED_ACCOUNT_IND,
+    REGEXP_REPLACE(V_ACCOUNT_CUSTOMER_ROLE_DESC, r'[\r\n]+', ' ') AS V_ACCOUNT_CUSTOMER_ROLE_DESC,
+    REGEXP_REPLACE(V_ACCOUNT_CUSTOMER_ROLE_ID, r'[\r\n]+', ' ') AS V_ACCOUNT_CUSTOMER_ROLE_ID,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_acct_role_master_tmp_h`;
+
+-- stg_customer_country_relation
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_country_relation_h`
+PARTITION BY FIC_MIS_DATE
+AS
+WITH m AS (SELECT d FROM UNNEST([DATE '2026-01-31', DATE '2026-02-28', DATE '2026-03-31', DATE '2026-04-30', DATE '2026-05-31']) AS d)
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_CUST_REF_CODE, r'[\r\n]+', ' ') AS V_CUST_REF_CODE,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_ISO_COUNTRY_CODE, r'[\r\n]+', ' ') AS V_ISO_COUNTRY_CODE,
+    REGEXP_REPLACE(V_RELATIONSHIP_TYPE, r'[\r\n]+', ' ') AS V_RELATIONSHIP_TYPE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_country_relation_tmp_h`
+UNION ALL
+SELECT d AS FIC_MIS_DATE, '0000000000000044' AS V_CUST_REF_CODE, 'CO3' AS V_DATA_ORIGIN, 'SK' AS V_ISO_COUNTRY_CODE, 'F' AS V_RELATIONSHIP_TYPE, d AS FIC_MIS_DATE_aux FROM m
+UNION ALL
+SELECT d AS FIC_MIS_DATE, '0000000000000076' AS V_CUST_REF_CODE, 'CO3' AS V_DATA_ORIGIN, 'SK' AS V_ISO_COUNTRY_CODE, 'F' AS V_RELATIONSHIP_TYPE, d AS FIC_MIS_DATE_aux FROM m;
+
+-- stg_customer_identifctn_doc
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_identifctn_doc_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_ENTITY_GOVT_DOC_FLAG, r'[\r\n]+', ' ') AS F_ENTITY_GOVT_DOC_FLAG,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_ASSESSMENT_TYPE, r'[\r\n]+', ' ') AS V_ASSESSMENT_TYPE,
+    REGEXP_REPLACE(V_CIP_VERIFICATION_CODE, r'[\r\n]+', ' ') AS V_CIP_VERIFICATION_CODE,
+    REGEXP_REPLACE(V_CIP_VERIFICATION_STATUS_CODE, r'[\r\n]+', ' ') AS V_CIP_VERIFICATION_STATUS_CODE,
+    REGEXP_REPLACE(V_CIP_VERIFIED_BY, r'[\r\n]+', ' ') AS V_CIP_VERIFIED_BY,
+    REGEXP_REPLACE(V_CUST_REF_CODE, r'[\r\n]+', ' ') AS V_CUST_REF_CODE,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_DOCUMENT_ID, r'[\r\n]+', ' ') AS V_DOCUMENT_ID,
+    REGEXP_REPLACE(V_DOCUMENT_NAME, r'[\r\n]+', ' ') AS V_DOCUMENT_NAME,
+    REGEXP_REPLACE(V_DOC_ISSUED_BY, r'[\r\n]+', ' ') AS V_DOC_ISSUED_BY,
+    REGEXP_REPLACE(V_DOC_PURPOSE_CODE, r'[\r\n]+', ' ') AS V_DOC_PURPOSE_CODE,
+    REGEXP_REPLACE(V_DOC_REF_NO, r'[\r\n]+', ' ') AS V_DOC_REF_NO,
+    REGEXP_REPLACE(V_DOC_TYPE_CODE, r'[\r\n]+', ' ') AS V_DOC_TYPE_CODE,
+    REGEXP_REPLACE(V_ISO_COUNTRY_CODE, r'[\r\n]+', ' ') AS V_ISO_COUNTRY_CODE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_customer_identifctn_doc_tmp_h`;
+
+-- stg_employee_master
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_employee_master_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_BRANCH_OFFICE_MANAGER_IND, r'[\r\n]+', ' ') AS F_BRANCH_OFFICE_MANAGER_IND,
+    REGEXP_REPLACE(F_EMPLOYEE_TAX_ID_FORMAT_IND, r'[\r\n]+', ' ') AS F_EMPLOYEE_TAX_ID_FORMAT_IND,
+    REGEXP_REPLACE(F_PART_FULL_TIME_IND, r'[\r\n]+', ' ') AS F_PART_FULL_TIME_IND,
+    REGEXP_REPLACE(F_SENSITIVE_INFO_ACCESS_IND, r'[\r\n]+', ' ') AS F_SENSITIVE_INFO_ACCESS_IND,
+    REGEXP_REPLACE(V_BRANCH_CODE, r'[\r\n]+', ' ') AS V_BRANCH_CODE,
+    REGEXP_REPLACE(V_BUSINESS_DOMAIN, r'[\r\n]+', ' ') AS V_BUSINESS_DOMAIN,
+    REGEXP_REPLACE(V_COMPLIANCE_OFFICER_ID, r'[\r\n]+', ' ') AS V_COMPLIANCE_OFFICER_ID,
+    REGEXP_REPLACE(V_COST_CENTER, r'[\r\n]+', ' ') AS V_COST_CENTER,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_DISPLAY_NAME, r'[\r\n]+', ' ') AS V_DISPLAY_NAME,
+    REGEXP_REPLACE(V_EMPLOYEE_ID, r'[\r\n]+', ' ') AS V_EMPLOYEE_ID,
+    REGEXP_REPLACE(V_EMPLOYEE_TAX_ID, r'[\r\n]+', ' ') AS V_EMPLOYEE_TAX_ID,
+    REGEXP_REPLACE(V_EMPLOYEE_TYPE, r'[\r\n]+', ' ') AS V_EMPLOYEE_TYPE,
+    REGEXP_REPLACE(V_EMPLOYMENT_STATUS, r'[\r\n]+', ' ') AS V_EMPLOYMENT_STATUS,
+    REGEXP_REPLACE(V_EMP_MARKET_REGION, r'[\r\n]+', ' ') AS V_EMP_MARKET_REGION,
+    REGEXP_REPLACE(V_FIRST_NAME, r'[\r\n]+', ' ') AS V_FIRST_NAME,
+    REGEXP_REPLACE(V_INVSTMNT_PLCY_MNGR_ID, r'[\r\n]+', ' ') AS V_INVSTMNT_PLCY_MNGR_ID,
+    REGEXP_REPLACE(V_JOB_DESCRIPTION, r'[\r\n]+', ' ') AS V_JOB_DESCRIPTION,
+    REGEXP_REPLACE(V_LAST_NAME, r'[\r\n]+', ' ') AS V_LAST_NAME,
+    REGEXP_REPLACE(V_LINE_SUPERVISOR_EMP_ID, r'[\r\n]+', ' ') AS V_LINE_SUPERVISOR_EMP_ID,
+    REGEXP_REPLACE(V_LOB_CODE, r'[\r\n]+', ' ') AS V_LOB_CODE,
+    REGEXP_REPLACE(V_OFFICE_ADDRESS_LINE2, r'[\r\n]+', ' ') AS V_OFFICE_ADDRESS_LINE2,
+    REGEXP_REPLACE(V_ORG_UNIT_CODE, r'[\r\n]+', ' ') AS V_ORG_UNIT_CODE,
+    REGEXP_REPLACE(V_PRIMARY_REP_SYS_LOGON_ID, r'[\r\n]+', ' ') AS V_PRIMARY_REP_SYS_LOGON_ID,
+    REGEXP_REPLACE(V_PRIM_SERVICE_TEAM_ID, r'[\r\n]+', ' ') AS V_PRIM_SERVICE_TEAM_ID,
+    REGEXP_REPLACE(V_REGISTRATION_ID, r'[\r\n]+', ' ') AS V_REGISTRATION_ID,
+    REGEXP_REPLACE(V_SEC_LOB_CD, r'[\r\n]+', ' ') AS V_SEC_LOB_CD,
+    REGEXP_REPLACE(V_SUPERVISION_CODE, r'[\r\n]+', ' ') AS V_SUPERVISION_CODE,
+    REGEXP_REPLACE(V_SUPERVISORY_ORG_ID, r'[\r\n]+', ' ') AS V_SUPERVISORY_ORG_ID,
+    REGEXP_REPLACE(V_SUPERVISORY_PRINCIPAL_ID, r'[\r\n]+', ' ') AS V_SUPERVISORY_PRINCIPAL_ID,
+    REGEXP_REPLACE(V_TRADER_REP_ROLE, r'[\r\n]+', ' ') AS V_TRADER_REP_ROLE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_employee_master_tmp_h`;
+
+-- stg_employee_service_account
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_employee_service_account_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_EMPLOYEE_ID, r'[\r\n]+', ' ') AS V_EMPLOYEE_ID,
+    REGEXP_REPLACE(V_EMP_ACCOUNT_ROLE, r'[\r\n]+', ' ') AS V_EMP_ACCOUNT_ROLE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_employee_service_account_tmp_h`;
+
+-- stg_front_office_txn_party
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_front_office_txn_party_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_INTERNAL_ACCOUNT_FLAG, r'[\r\n]+', ' ') AS F_INTERNAL_ACCOUNT_FLAG,
+    REGEXP_REPLACE(F_UNKNOWN_PARTY_NAME_INDICATOR, r'[\r\n]+', ' ') AS F_UNKNOWN_PARTY_NAME_INDICATOR,
+    REGEXP_REPLACE(V_ACCOUNTING_RULE, r'[\r\n]+', ' ') AS V_ACCOUNTING_RULE,
+    REGEXP_REPLACE(V_ACTIVITY_CURRENCY, r'[\r\n]+', ' ') AS V_ACTIVITY_CURRENCY,
+    REGEXP_REPLACE(V_ADDRESS_LINE_1, r'[\r\n]+', ' ') AS V_ADDRESS_LINE_1,
+    REGEXP_REPLACE(V_ADDRESS_LINE_2, r'[\r\n]+', ' ') AS V_ADDRESS_LINE_2,
+    REGEXP_REPLACE(V_ADDRESS_LINE_3, r'[\r\n]+', ' ') AS V_ADDRESS_LINE_3,
+    REGEXP_REPLACE(V_ADDRESS_LINE_4, r'[\r\n]+', ' ') AS V_ADDRESS_LINE_4,
+    REGEXP_REPLACE(V_ADDRESS_LINE_5, r'[\r\n]+', ' ') AS V_ADDRESS_LINE_5,
+    REGEXP_REPLACE(V_ADDRESS_LINE_6, r'[\r\n]+', ' ') AS V_ADDRESS_LINE_6,
+    REGEXP_REPLACE(V_ADDRESS_PURPOSE, r'[\r\n]+', ' ') AS V_ADDRESS_PURPOSE,
+    REGEXP_REPLACE(V_BUILDING_NUMBER, r'[\r\n]+', ' ') AS V_BUILDING_NUMBER,
+    REGEXP_REPLACE(V_CITY, r'[\r\n]+', ' ') AS V_CITY,
+    REGEXP_REPLACE(V_CORRESPONDENT_RELATIONSHIP, r'[\r\n]+', ' ') AS V_CORRESPONDENT_RELATIONSHIP,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_DEPARTMENT, r'[\r\n]+', ' ') AS V_DEPARTMENT,
+    REGEXP_REPLACE(V_ISO_COUNTRY_CODE, r'[\r\n]+', ' ') AS V_ISO_COUNTRY_CODE,
+    REGEXP_REPLACE(V_NORMALIZED_PARTY_NAME, r'[\r\n]+', ' ') AS V_NORMALIZED_PARTY_NAME,
+    REGEXP_REPLACE(V_PARTY_BRANCH_ID, r'[\r\n]+', ' ') AS V_PARTY_BRANCH_ID,
+    REGEXP_REPLACE(V_PARTY_DERIVATION_METHOD, r'[\r\n]+', ' ') AS V_PARTY_DERIVATION_METHOD,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID,
+    REGEXP_REPLACE(V_PARTY_ID_CLASS, r'[\r\n]+', ' ') AS V_PARTY_ID_CLASS,
+    REGEXP_REPLACE(V_PARTY_ID_ISSUER, r'[\r\n]+', ' ') AS V_PARTY_ID_ISSUER,
+    REGEXP_REPLACE(V_PARTY_ID_TYPE, r'[\r\n]+', ' ') AS V_PARTY_ID_TYPE,
+    REGEXP_REPLACE(V_PARTY_NAME, r'[\r\n]+', ' ') AS V_PARTY_NAME,
+    REGEXP_REPLACE(V_PARTY_ROLE, r'[\r\n]+', ' ') AS V_PARTY_ROLE,
+    REGEXP_REPLACE(V_POSTAL_CD, r'[\r\n]+', ' ') AS V_POSTAL_CD,
+    REGEXP_REPLACE(V_RESIDENT_ISO_COUNTRY_CODE, r'[\r\n]+', ' ') AS V_RESIDENT_ISO_COUNTRY_CODE,
+    REGEXP_REPLACE(V_STATE_OR_PROVINCE, r'[\r\n]+', ' ') AS V_STATE_OR_PROVINCE,
+    REGEXP_REPLACE(V_TXN_REF_NO, r'[\r\n]+', ' ') AS V_TXN_REF_NO
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_front_office_txn_party_tmp_h`;
+
+-- stg_loan_contracts
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_loan_contracts_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_ACCT_DISPLAY_NAME, r'[\r\n]+', ' ') AS V_ACCT_DISPLAY_NAME,
+    REGEXP_REPLACE(V_BUSINESS_DOMAIN, r'[\r\n]+', ' ') AS V_BUSINESS_DOMAIN,
+    REGEXP_REPLACE(V_CCY_CODE, r'[\r\n]+', ' ') AS V_CCY_CODE,
+    REGEXP_REPLACE(V_COMMITMENT_TYPE_CD, r'[\r\n]+', ' ') AS V_COMMITMENT_TYPE_CD,
+    REGEXP_REPLACE(V_CUST_REF_CODE, r'[\r\n]+', ' ') AS V_CUST_REF_CODE,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_GAAP_CODE, r'[\r\n]+', ' ') AS V_GAAP_CODE,
+    REGEXP_REPLACE(V_LOAN_TYPE, r'[\r\n]+', ' ') AS V_LOAN_TYPE,
+    REGEXP_REPLACE(V_MANTAS_ACCT_HOLDR_TYPE, r'[\r\n]+', ' ') AS V_MANTAS_ACCT_HOLDR_TYPE,
+    REGEXP_REPLACE(V_OWNERSHIP_TYPE, r'[\r\n]+', ' ') AS V_OWNERSHIP_TYPE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_loan_contracts_tmp_h`;
+
+-- stg_party_account_role_map
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_account_role_map_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_ACCT_PARTY_OPERATN_ROLE_CD, r'[\r\n]+', ' ') AS V_ACCT_PARTY_OPERATN_ROLE_CD,
+    REGEXP_REPLACE(V_ACCT_PARTY_ROLE, r'[\r\n]+', ' ') AS V_ACCT_PARTY_ROLE,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_account_role_map_tmp_h`;
+
+-- stg_party_address_map
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_address_map_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_ADDRESS_ID, r'[\r\n]+', ' ') AS V_ADDRESS_ID,
+    REGEXP_REPLACE(V_ADDRESS_PURPOSE_TYPE_CD, r'[\r\n]+', ' ') AS V_ADDRESS_PURPOSE_TYPE_CD,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_address_map_tmp_h`;
+
+-- stg_party_details
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_details_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_FINANCIAL_INST_EMPLOYED, r'[\r\n]+', ' ') AS F_FINANCIAL_INST_EMPLOYED,
+    REGEXP_REPLACE(F_FOREIGN_ASSETS_FLAG, r'[\r\n]+', ' ') AS F_FOREIGN_ASSETS_FLAG,
+    REGEXP_REPLACE(V_CLIENT_PROFILE_IND, r'[\r\n]+', ' ') AS V_CLIENT_PROFILE_IND,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID,
+    REGEXP_REPLACE(V_PRIMARY_WEALTH_SOURCE, r'[\r\n]+', ' ') AS V_PRIMARY_WEALTH_SOURCE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_details_tmp_h`;
+
+-- stg_party_email_map
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_email_map_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_DATA_SOURCE_CODE, r'[\r\n]+', ' ') AS V_DATA_SOURCE_CODE,
+    REGEXP_REPLACE(V_EMAIL_ID, r'[\r\n]+', ' ') AS V_EMAIL_ID,
+    REGEXP_REPLACE(V_EMAIL_PURPOSE_TYPE_CD, r'[\r\n]+', ' ') AS V_EMAIL_PURPOSE_TYPE_CD,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_email_map_tmp_h`;
+
+-- stg_party_master
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_master_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_CDD_RULE_EXEMPT, r'[\r\n]+', ' ') AS F_CDD_RULE_EXEMPT,
+    REGEXP_REPLACE(F_CERT_LOSS_NATIONALITY_FLAG, r'[\r\n]+', ' ') AS F_CERT_LOSS_NATIONALITY_FLAG,
+    REGEXP_REPLACE(F_CIP_EXEMPT_FLAG, r'[\r\n]+', ' ') AS F_CIP_EXEMPT_FLAG,
+    REGEXP_REPLACE(F_COMPENSATION_FLAG, r'[\r\n]+', ' ') AS F_COMPENSATION_FLAG,
+    REGEXP_REPLACE(F_EXCEPTED_NFFE_FLAG, r'[\r\n]+', ' ') AS F_EXCEPTED_NFFE_FLAG,
+    REGEXP_REPLACE(F_FINANCIAL_ENTITY_IND, r'[\r\n]+', ' ') AS F_FINANCIAL_ENTITY_IND,
+    REGEXP_REPLACE(F_FOREIGN_PUBLIC_OFFICIAL_FLAG, r'[\r\n]+', ' ') AS F_FOREIGN_PUBLIC_OFFICIAL_FLAG,
+    REGEXP_REPLACE(F_FOREIGN_TAX_REP_CERT_FLAG, r'[\r\n]+', ' ') AS F_FOREIGN_TAX_REP_CERT_FLAG,
+    REGEXP_REPLACE(F_NON_US_CIT_RES_FLAG, r'[\r\n]+', ' ') AS F_NON_US_CIT_RES_FLAG,
+    REGEXP_REPLACE(F_NON_US_DOC_HOLDER_FLAG, r'[\r\n]+', ' ') AS F_NON_US_DOC_HOLDER_FLAG,
+    REGEXP_REPLACE(F_PARTY_EMP_FLAG, r'[\r\n]+', ' ') AS F_PARTY_EMP_FLAG,
+    REGEXP_REPLACE(F_PARTY_TAX_ID_FORMAT_IND, r'[\r\n]+', ' ') AS F_PARTY_TAX_ID_FORMAT_IND,
+    REGEXP_REPLACE(F_PEP_FLAG, r'[\r\n]+', ' ') AS F_PEP_FLAG,
+    REGEXP_REPLACE(F_RECALCITRANT_FLAG, r'[\r\n]+', ' ') AS F_RECALCITRANT_FLAG,
+    REGEXP_REPLACE(F_THIRD_PARTY_CREDIT_REP_FLAG, r'[\r\n]+', ' ') AS F_THIRD_PARTY_CREDIT_REP_FLAG,
+    REGEXP_REPLACE(V_ADDRESS_COUNTRY, r'[\r\n]+', ' ') AS V_ADDRESS_COUNTRY,
+    REGEXP_REPLACE(V_BRANCH_CODE, r'[\r\n]+', ' ') AS V_BRANCH_CODE,
+    REGEXP_REPLACE(V_BUSINESS_DOMAIN, r'[\r\n]+', ' ') AS V_BUSINESS_DOMAIN,
+    REGEXP_REPLACE(V_BUSS_SEGMENT, r'[\r\n]+', ' ') AS V_BUSS_SEGMENT,
+    REGEXP_REPLACE(V_CDD_RULE_EXEMPT_REASON_CODE, r'[\r\n]+', ' ') AS V_CDD_RULE_EXEMPT_REASON_CODE,
+    REGEXP_REPLACE(V_CIP_EXEMPT_REASON_CODE, r'[\r\n]+', ' ') AS V_CIP_EXEMPT_REASON_CODE,
+    REGEXP_REPLACE(V_CITIZENSHIP_TYPE, r'[\r\n]+', ' ') AS V_CITIZENSHIP_TYPE,
+    REGEXP_REPLACE(V_CREDIT_SCORE_SOURCE, r'[\r\n]+', ' ') AS V_CREDIT_SCORE_SOURCE,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_DISPLAY_NM, r'[\r\n]+', ' ') AS V_DISPLAY_NM,
+    REGEXP_REPLACE(V_DOMICILE_COUNTRY_CODE, r'[\r\n]+', ' ') AS V_DOMICILE_COUNTRY_CODE,
+    REGEXP_REPLACE(V_EMP_COMPANY, r'[\r\n]+', ' ') AS V_EMP_COMPANY,
+    REGEXP_REPLACE(V_FATCA_ORG_TYPE, r'[\r\n]+', ' ') AS V_FATCA_ORG_TYPE,
+    REGEXP_REPLACE(V_GENDER, r'[\r\n]+', ' ') AS V_GENDER,
+    REGEXP_REPLACE(V_GIIN_ID, r'[\r\n]+', ' ') AS V_GIIN_ID,
+    REGEXP_REPLACE(V_INCORPORATION_COUNTRY_CD, r'[\r\n]+', ' ') AS V_INCORPORATION_COUNTRY_CD,
+    REGEXP_REPLACE(V_INDUSTRY_CODE, r'[\r\n]+', ' ') AS V_INDUSTRY_CODE,
+    REGEXP_REPLACE(V_INST_TOP_PRNT_CUST_REF_ID, r'[\r\n]+', ' ') AS V_INST_TOP_PRNT_CUST_REF_ID,
+    REGEXP_REPLACE(V_ISO_COUNTRY_CD, r'[\r\n]+', ' ') AS V_ISO_COUNTRY_CD,
+    REGEXP_REPLACE(V_JOB_TITLE, r'[\r\n]+', ' ') AS V_JOB_TITLE,
+    REGEXP_REPLACE(V_LAST_NAME, r'[\r\n]+', ' ') AS V_LAST_NAME,
+    REGEXP_REPLACE(V_MARITAL_STATUS, r'[\r\n]+', ' ') AS V_MARITAL_STATUS,
+    REGEXP_REPLACE(V_MIDDLE_NAME, r'[\r\n]+', ' ') AS V_MIDDLE_NAME,
+    REGEXP_REPLACE(V_NAICS_CODE, r'[\r\n]+', ' ') AS V_NAICS_CODE,
+    REGEXP_REPLACE(V_NATIONALITY, r'[\r\n]+', ' ') AS V_NATIONALITY,
+    REPLACE(REGEXP_REPLACE(V_NATIONALITY_CITY, r'[\r\n]+', ' '), '|', '') AS V_NATIONALITY_CITY,
+    REGEXP_REPLACE(V_NATIONALITY_COUNTRY, r'[\r\n]+', ' ') AS V_NATIONALITY_COUNTRY,
+    REGEXP_REPLACE(V_OCCUPATION, r'[\r\n]+', ' ') AS V_OCCUPATION,
+    REGEXP_REPLACE(V_OCCUPATION_STATUS, r'[\r\n]+', ' ') AS V_OCCUPATION_STATUS,
+    REGEXP_REPLACE(V_ORG_CONSTITUENT_TYPE, r'[\r\n]+', ' ') AS V_ORG_CONSTITUENT_TYPE,
+    REGEXP_REPLACE(V_ORIG_PARTY_ID, r'[\r\n]+', ' ') AS V_ORIG_PARTY_ID,
+    REGEXP_REPLACE(V_PARTY_ALIAS, r'[\r\n]+', ' ') AS V_PARTY_ALIAS,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID,
+    REGEXP_REPLACE(V_PARTY_NAME, r'[\r\n]+', ' ') AS V_PARTY_NAME,
+    REGEXP_REPLACE(V_PARTY_TYPE, r'[\r\n]+', ' ') AS V_PARTY_TYPE,
+    REGEXP_REPLACE(V_PRIMRY_STOCK_EXCH_CUSIP_CODE, r'[\r\n]+', ' ') AS V_PRIMRY_STOCK_EXCH_CUSIP_CODE,
+    REGEXP_REPLACE(V_PROFESSION, r'[\r\n]+', ' ') AS V_PROFESSION,
+    REGEXP_REPLACE(V_PUBLIC_PRIVATE_HELD, r'[\r\n]+', ' ') AS V_PUBLIC_PRIVATE_HELD,
+    REGEXP_REPLACE(V_REGION_CODE, r'[\r\n]+', ' ') AS V_REGION_CODE,
+    REGEXP_REPLACE(V_REGISTRATION_TYPE, r'[\r\n]+', ' ') AS V_REGISTRATION_TYPE,
+    REGEXP_REPLACE(V_RELATIONSHIP_MANAGER_CODE, r'[\r\n]+', ' ') AS V_RELATIONSHIP_MANAGER_CODE,
+    REGEXP_REPLACE(V_SALUTATION, r'[\r\n]+', ' ') AS V_SALUTATION,
+    REGEXP_REPLACE(V_SECONDARY_CITIZENSHIP, r'[\r\n]+', ' ') AS V_SECONDARY_CITIZENSHIP,
+    REGEXP_REPLACE(V_SEC_CITZN_COUNTRY_CODE, r'[\r\n]+', ' ') AS V_SEC_CITZN_COUNTRY_CODE,
+    REGEXP_REPLACE(V_STOCK_EXCHANGE, r'[\r\n]+', ' ') AS V_STOCK_EXCHANGE,
+    REGEXP_REPLACE(V_SUFFIX_NAME, r'[\r\n]+', ' ') AS V_SUFFIX_NAME,
+    REGEXP_REPLACE(V_TAX_COUNTRY_CODE, r'[\r\n]+', ' ') AS V_TAX_COUNTRY_CODE,
+    REGEXP_REPLACE(V_TAX_IDENTIFIER, r'[\r\n]+', ' ') AS V_TAX_IDENTIFIER,
+    REGEXP_REPLACE(V_TICKER_SYMBOL, r'[\r\n]+', ' ') AS V_TICKER_SYMBOL,
+    REGEXP_REPLACE(V_WEBSITE, r'[\r\n]+', ' ') AS V_WEBSITE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_master_tmp_h`;
+
+-- stg_party_other_names
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_other_names_h`
+PARTITION BY FIC_MIS_DATE
+AS
+WITH m AS (SELECT d FROM UNNEST([DATE '2026-01-31', DATE '2026-02-28', DATE '2026-03-31', DATE '2026-04-30', DATE '2026-05-31']) AS d)
+SELECT DATE '9999-12-31' AS D_VALIDATION_END_DATE, DATE '9999-12-31' AS D_VALIDATION_START_DATE, d AS FIC_MIS_DATE, '1' AS N_PARTY_OTHER_NAME_ID, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_LANGUAGE, CAST(NULL AS STRING) AS V_LAST_NAME, CAST(NULL AS STRING) AS V_MIDDLE_NAME, CAST(NULL AS STRING) AS V_NAME_QUALITY, CAST(NULL AS STRING) AS V_OTHER_NAME_TYPE, CAST(NULL AS STRING) AS V_PARTY_FULL_NAME, '0000000000000018' AS V_PARTY_ID, 'Špalková' AS V_PARTY_NAME, CAST(NULL AS STRING) AS V_SALUTATION, CAST(NULL AS STRING) AS V_SUFFIX, d AS FIC_MIS_DATE_aux FROM m
+UNION ALL
+SELECT DATE '9999-12-31' AS D_VALIDATION_END_DATE, DATE '9999-12-31' AS D_VALIDATION_START_DATE, d AS FIC_MIS_DATE, '1' AS N_PARTY_OTHER_NAME_ID, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_LANGUAGE, CAST(NULL AS STRING) AS V_LAST_NAME, CAST(NULL AS STRING) AS V_MIDDLE_NAME, CAST(NULL AS STRING) AS V_NAME_QUALITY, CAST(NULL AS STRING) AS V_OTHER_NAME_TYPE, CAST(NULL AS STRING) AS V_PARTY_FULL_NAME, '0000000000000041' AS V_PARTY_ID, 'Beňa' AS V_PARTY_NAME, CAST(NULL AS STRING) AS V_SALUTATION, CAST(NULL AS STRING) AS V_SUFFIX, d AS FIC_MIS_DATE_aux FROM m;
+
+-- stg_party_party_relationship
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_party_relationship_h`
+PARTITION BY FIC_MIS_DATE
+AS
+WITH m AS (SELECT d FROM UNNEST([DATE '2026-01-31', DATE '2026-02-28', DATE '2026-03-31', DATE '2026-04-30', DATE '2026-05-31']) AS d)
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_BORR_RELATED_PARTY_TYPE_IND, r'[\r\n]+', ' ') AS F_BORR_RELATED_PARTY_TYPE_IND,
+    REGEXP_REPLACE(F_CONTROLLING_AUTH_FLAG, r'[\r\n]+', ' ') AS F_CONTROLLING_AUTH_FLAG,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_PARENT_ID, r'[\r\n]+', ' ') AS V_PARENT_ID,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID,
+    REGEXP_REPLACE(V_RELATED_PARTY_ID, r'[\r\n]+', ' ') AS V_RELATED_PARTY_ID,
+    REGEXP_REPLACE(V_RELATIONSHIP_DESC, r'[\r\n]+', ' ') AS V_RELATIONSHIP_DESC,
+    REGEXP_REPLACE(V_RELATIONSHIP_TYPE_CODE, r'[\r\n]+', ' ') AS V_RELATIONSHIP_TYPE_CODE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_party_relationship_tmp_h`
+UNION ALL
+SELECT DATE '2017-10-07' AS D_RELATIONSHIP_EFF_DATE, CAST(NULL AS DATE) AS D_RELATIONSHIP_EXP_DATE, d AS FIC_MIS_DATE, CAST(NULL AS STRING) AS F_BORR_RELATED_PARTY_TYPE_IND, 'N' AS F_CONTROLLING_AUTH_FLAG, CAST(NULL AS FLOAT64) AS N_SHAREHOLDING_PERCENT, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_PARENT_ID, '0000000000100880' AS V_PARTY_ID, '0000000001001537' AS V_RELATED_PARTY_ID, 'Persons on whose behalf ' AS V_RELATIONSHIP_DESC, 'PEP' AS V_RELATIONSHIP_TYPE_CODE, d AS FIC_MIS_DATE_aux FROM m
+UNION ALL
+SELECT DATE '2017-10-07' AS D_RELATIONSHIP_EFF_DATE, CAST(NULL AS DATE) AS D_RELATIONSHIP_EXP_DATE, d AS FIC_MIS_DATE, CAST(NULL AS STRING) AS F_BORR_RELATED_PARTY_TYPE_IND, 'N' AS F_CONTROLLING_AUTH_FLAG, CAST(NULL AS FLOAT64) AS N_SHAREHOLDING_PERCENT, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_PARENT_ID, '0000000006625278' AS V_PARTY_ID, '0000000001014115' AS V_RELATED_PARTY_ID, 'Persons on whose behalf ' AS V_RELATIONSHIP_DESC, 'PEP' AS V_RELATIONSHIP_TYPE_CODE, d AS FIC_MIS_DATE_aux FROM m
+UNION ALL
+SELECT DATE '2017-10-07' AS D_RELATIONSHIP_EFF_DATE, CAST(NULL AS DATE) AS D_RELATIONSHIP_EXP_DATE, d AS FIC_MIS_DATE, CAST(NULL AS STRING) AS F_BORR_RELATED_PARTY_TYPE_IND, 'N' AS F_CONTROLLING_AUTH_FLAG, CAST(NULL AS FLOAT64) AS N_SHAREHOLDING_PERCENT, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_PARENT_ID, '0000000001431034' AS V_PARTY_ID, '0000000001018402' AS V_RELATED_PARTY_ID, 'Senior Managing Officials' AS V_RELATIONSHIP_DESC, 'SMO' AS V_RELATIONSHIP_TYPE_CODE, d AS FIC_MIS_DATE_aux FROM m
+UNION ALL
+SELECT DATE '2017-10-07' AS D_RELATIONSHIP_EFF_DATE, CAST(NULL AS DATE) AS D_RELATIONSHIP_EXP_DATE, d AS FIC_MIS_DATE, CAST(NULL AS STRING) AS F_BORR_RELATED_PARTY_TYPE_IND, 'N' AS F_CONTROLLING_AUTH_FLAG, CAST(NULL AS FLOAT64) AS N_SHAREHOLDING_PERCENT, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_PARENT_ID, '0000000001482112' AS V_PARTY_ID, '0000000006726911' AS V_RELATED_PARTY_ID, 'Senior Managing Officials' AS V_RELATIONSHIP_DESC, 'SMO' AS V_RELATIONSHIP_TYPE_CODE, d AS FIC_MIS_DATE_aux FROM m
+UNION ALL
+SELECT DATE '2017-10-07' AS D_RELATIONSHIP_EFF_DATE, CAST(NULL AS DATE) AS D_RELATIONSHIP_EXP_DATE, d AS FIC_MIS_DATE, CAST(NULL AS STRING) AS F_BORR_RELATED_PARTY_TYPE_IND, 'N' AS F_CONTROLLING_AUTH_FLAG, CAST(NULL AS FLOAT64) AS N_SHAREHOLDING_PERCENT, 'CO3' AS V_DATA_ORIGIN, CAST(NULL AS STRING) AS V_PARENT_ID, '0000000001028179' AS V_PARTY_ID, '0000000001030593' AS V_RELATED_PARTY_ID, 'Senior Managing Officials' AS V_RELATIONSHIP_DESC, 'SMO' AS V_RELATIONSHIP_TYPE_CODE, d AS FIC_MIS_DATE_aux FROM m;
+
+-- stg_party_phone_map
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_phone_map_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_ISO_COUNTRY_CD, r'[\r\n]+', ' ') AS V_ISO_COUNTRY_CD,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID,
+    REGEXP_REPLACE(V_PHONE_EXTN, r'[\r\n]+', ' ') AS V_PHONE_EXTN,
+    REGEXP_REPLACE(V_PHONE_ID, r'[\r\n]+', ' ') AS V_PHONE_ID,
+    REGEXP_REPLACE(V_PHONE_NUMBER, r'[\r\n]+', ' ') AS V_PHONE_NUMBER,
+    REGEXP_REPLACE(V_PHONE_PURPOSE_TYPE_CD, r'[\r\n]+', ' ') AS V_PHONE_PURPOSE_TYPE_CD
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_phone_map_tmp_h`;
+
+-- stg_party_role_map
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_role_map_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_PARTY_ID, r'[\r\n]+', ' ') AS V_PARTY_ID,
+    REGEXP_REPLACE(V_PARTY_ROLE, r'[\r\n]+', ' ') AS V_PARTY_ROLE,
+    REGEXP_REPLACE(V_PARTY_STATUS, r'[\r\n]+', ' ') AS V_PARTY_STATUS
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_role_map_tmp_h`;
+
+-- stg_party_type_master
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_type_master_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_PARTY_CATEGORY, r'[\r\n]+', ' ') AS V_PARTY_CATEGORY,
+    REGEXP_REPLACE(V_PARTY_TYPE_CODE, r'[\r\n]+', ' ') AS V_PARTY_TYPE_CODE,
+    REGEXP_REPLACE(V_PARTY_TYPE_DESC, r'[\r\n]+', ' ') AS V_PARTY_TYPE_DESC
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_party_type_master_tmp_h`;
+
+-- stg_trading_account_txns
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_trading_account_txns_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(F_CROSS_BORDER_TXN_FLAG, r'[\r\n]+', ' ') AS F_CROSS_BORDER_TXN_FLAG,
+    REGEXP_REPLACE(F_UNRELATED_PARTY_FLAG, r'[\r\n]+', ' ') AS F_UNRELATED_PARTY_FLAG,
+    REGEXP_REPLACE(V_ACCOUNT_NUMBER, r'[\r\n]+', ' ') AS V_ACCOUNT_NUMBER,
+    REGEXP_REPLACE(V_BRANCH_CODE, r'[\r\n]+', ' ') AS V_BRANCH_CODE,
+    REGEXP_REPLACE(V_CANCELED_PAIRING_TXN_ID, r'[\r\n]+', ' ') AS V_CANCELED_PAIRING_TXN_ID,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_INSTRUMENT_CODE, r'[\r\n]+', ' ') AS V_INSTRUMENT_CODE,
+    REGEXP_REPLACE(V_MANTAS_TXN_ADJUSTMENT_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_ADJUSTMENT_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_ASSET_CLASS_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_ASSET_CLASS_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_CHANNEL_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_CHANNEL_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_PROD_TYPE_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_PROD_TYPE_CD,
+    REGEXP_REPLACE(V_MANTAS_TXN_PURPOSE_CD, r'[\r\n]+', ' ') AS V_MANTAS_TXN_PURPOSE_CD,
+    REGEXP_REPLACE(V_TXN_CHANNEL_LOCATION_ID, r'[\r\n]+', ' ') AS V_TXN_CHANNEL_LOCATION_ID,
+    REGEXP_REPLACE(V_TXN_LOCATION_ADDRESS, r'[\r\n]+', ' ') AS V_TXN_LOCATION_ADDRESS,
+    REGEXP_REPLACE(V_TXN_REF_NO, r'[\r\n]+', ' ') AS V_TXN_REF_NO
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_trading_account_txns_tmp_h`;
+
+-- stg_txn_alt_ccy_values
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_txn_alt_ccy_values_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_DATA_SOURCE_CODE, r'[\r\n]+', ' ') AS V_DATA_SOURCE_CODE,
+    REGEXP_REPLACE(V_RCY_CODE, r'[\r\n]+', ' ') AS V_RCY_CODE,
+    REGEXP_REPLACE(V_TXN_FCY_CODE, r'[\r\n]+', ' ') AS V_TXN_FCY_CODE,
+    REGEXP_REPLACE(V_TXN_REF_NO, r'[\r\n]+', ' ') AS V_TXN_REF_NO
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_txn_alt_ccy_values_tmp_h`;
+
+-- stg_unc_csmt_table
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_unc_csmt_table_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(N_CSMT_TX_1, r'[\r\n]+', ' ') AS N_CSMT_TX_1,
+    REGEXP_REPLACE(N_CSMT_TX_2, r'[\r\n]+', ' ') AS N_CSMT_TX_2,
+    REGEXP_REPLACE(N_CSMT_TX_3, r'[\r\n]+', ' ') AS N_CSMT_TX_3,
+    REGEXP_REPLACE(N_CSMT_TX_4, r'[\r\n]+', ' ') AS N_CSMT_TX_4,
+    REGEXP_REPLACE(N_CSMT_TX_5, r'[\r\n]+', ' ') AS N_CSMT_TX_5,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_KEY1, r'[\r\n]+', ' ') AS V_KEY1,
+    REGEXP_REPLACE(V_KEY_COLMN, r'[\r\n]+', ' ') AS V_KEY_COLMN,
+    REGEXP_REPLACE(V_TABLE_NM, r'[\r\n]+', ' ') AS V_TABLE_NM
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_unc_csmt_table_tmp_h`;
+
+-- stg_watchlist_master
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_watchlist_master_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_BUSINESS_DOMAIN, r'[\r\n]+', ' ') AS V_BUSINESS_DOMAIN,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_WATCH_LIST_DESC, r'[\r\n]+', ' ') AS V_WATCH_LIST_DESC,
+    REGEXP_REPLACE(V_WATCH_LIST_ID, r'[\r\n]+', ' ') AS V_WATCH_LIST_ID,
+    REGEXP_REPLACE(V_WATCH_LIST_NAME, r'[\r\n]+', ' ') AS V_WATCH_LIST_NAME,
+    REGEXP_REPLACE(V_WATCH_LIST_PUB_PVT_CODE, r'[\r\n]+', ' ') AS V_WATCH_LIST_PUB_PVT_CODE,
+    REGEXP_REPLACE(V_WATCH_LIST_TYPE, r'[\r\n]+', ' ') AS V_WATCH_LIST_TYPE
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_watchlist_master_tmp_h`;
+
+-- stg_watchlist_member_entry
+CREATE OR REPLACE TABLE `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_watchlist_member_entry_h`
+PARTITION BY FIC_MIS_DATE
+AS
+SELECT * REPLACE (
+    LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE,
+    REGEXP_REPLACE(V_BUSINESS_CLUSTER, r'[\r\n]+', ' ') AS V_BUSINESS_CLUSTER,
+    REGEXP_REPLACE(V_BUSINESS_DOMAIN, r'[\r\n]+', ' ') AS V_BUSINESS_DOMAIN,
+    REGEXP_REPLACE(V_DATA_JURISDICTION, r'[\r\n]+', ' ') AS V_DATA_JURISDICTION,
+    REGEXP_REPLACE(V_DATA_ORIGIN, r'[\r\n]+', ' ') AS V_DATA_ORIGIN,
+    REGEXP_REPLACE(V_WATCHLIST_ID, r'[\r\n]+', ' ') AS V_WATCHLIST_ID,
+    REGEXP_REPLACE(V_WATCHLIST_MEMBER_ID, r'[\r\n]+', ' ') AS V_WATCHLIST_MEMBER_ID,
+    REGEXP_REPLACE(V_WATCHLIST_MEMBER_TYPE, r'[\r\n]+', ' ') AS V_WATCHLIST_MEMBER_TYPE,
+    REGEXP_REPLACE(V_WATCH_LIST_ENTRY_DESC, r'[\r\n]+', ' ') AS V_WATCH_LIST_ENTRY_DESC,
+    REGEXP_REPLACE(V_WATCH_LIST_REASON_CD, r'[\r\n]+', ' ') AS V_WATCH_LIST_REASON_CD,
+    REGEXP_REPLACE(V_WATCH_LIST_SOURCE_CD, r'[\r\n]+', ' ') AS V_WATCH_LIST_SOURCE_CD
+  ),
+  LAST_DAY(FIC_MIS_DATE) AS FIC_MIS_DATE_aux
+FROM `prj-dpu-prd-dpcc-001.bqd_dpu_prd_ew8_edl_fdm_aml_feeding_bzy_0_bqd_edl_fdm_aml_feeding_bzy_bigquery_dataset.int_stg_watchlist_member_entry_tmp_h`;
